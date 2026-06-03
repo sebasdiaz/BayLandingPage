@@ -771,18 +771,42 @@
     e.preventDefault();
     const form = document.getElementById('leadForm');
     const success = document.getElementById('formSuccess');
+    const btn = form.querySelector('.form-submit');
+
     const data = {
-      nombre:   document.getElementById('nombre').value,
-      whatsapp: document.getElementById('whatsapp').value,
-      email:    document.getElementById('email').value,
+      nombre:   document.getElementById('nombre').value.trim(),
+      whatsapp: document.getElementById('whatsapp').value.trim(),
+      email:    document.getElementById('email').value.trim(),
       fecha:    new Date().toISOString()
     };
-    console.log('Lead capturado:', data);
-    // TODO: replace with your actual endpoint / CRM integration
-    // fetch('/api/leads', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) })
 
-    form.style.display = 'none';
-    success.style.display = 'block';
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    try {
+      const sasToken = 'sp=racw&st=2026-06-03T21:56:00Z&se=2029-06-04T06:11:00Z&sv=2026-02-06&sr=c&sig=oLcAyATIfb3%2FLn4IbDmVXA56G6Am2qdm%2FbtS4nrORHA%3D';
+      const blobName = `${new Date().toISOString().replace(/[:.]/g,'-')}_${Math.random().toString(36).slice(2,8)}.json`;
+      const url = `https://bayleads.blob.core.windows.net/leads/${blobName}?${sasToken}`;
+
+      const res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'x-ms-blob-type': 'BlockBlob',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      form.style.display = 'none';
+      success.style.display = 'block';
+    } catch (err) {
+      console.error('Error al guardar prospecto:', err);
+      btn.disabled = false;
+      btn.textContent = 'Quiero ser partner →';
+      alert('Hubo un error al enviar. Por favor intentá de nuevo.');
+    }
   }
 
   function toggleMenu(el) {
