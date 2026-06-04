@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAY Mayorista — Tu socio estratégico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wine:   #7B1E1E;
+      --wine-d: #5C1616;
+      --wine-l: #A02828;
+      --dark:   #1A1A1A;
+      --gray:   #5A5A5A;
+      --light:  #F5F3F0;
+      --white:  #FFFFFF;
+      --border: #E0DADA;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--dark); background: var(--white); }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+    }
+    .nav-logo { color: var(--white); font-size: 1.4rem; font-weight: 900; letter-spacing: 3px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #ccc; font-size: .85rem; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--wine); color: var(--white);
+      padding: .5rem 1.25rem; border-radius: 4px;
+      font-size: .85rem; font-weight: 600; text-decoration: none;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--wine-l); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+      background: var(--light);
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 5% 5rem 8%;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--wine); color: var(--white);
+      font-size: .7rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: .3rem .8rem; border-radius: 2px;
+      margin-bottom: 1.5rem; width: fit-content;
+    }
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 900; line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero-text h1 em { font-style: normal; color: var(--wine); text-decoration: underline; text-underline-offset: 6px; }
+    .hero-text p { font-size: 1rem; color: var(--gray); line-height: 1.75; margin-bottom: 2rem; max-width: 420px; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--wine); color: var(--white);
+      padding: .85rem 1.75rem; border-radius: 4px;
+      font-weight: 700; font-size: .9rem; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--wine-l); transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid var(--dark); color: var(--dark);
+      padding: .85rem 1.75rem; border-radius: 4px;
+      font-weight: 700; font-size: .9rem; text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-outline:hover { background: var(--dark); color: var(--white); }
+
+    .hero-image {
+      background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80') center/cover no-repeat;
+      min-height: 400px;
+    }
+    .hero-image-overlay {
+      width: 100%; height: 100%;
+      background: linear-gradient(to right, var(--light) 0%, transparent 25%);
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--white);
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: .75rem;
+      padding: 1.5rem 2.5rem;
+      border-right: 1px solid var(--border);
+      flex: 1; min-width: 180px;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon { font-size: 1.5rem; }
+    .trust-item p { font-size: .82rem; color: var(--gray); line-height: 1.4; max-width: 140px; }
+    .trust-item strong { display: block; font-size: .85rem; color: var(--dark); margin-bottom: .1rem; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 5rem 5%; }
+    .section-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--wine); margin-bottom: .75rem;
+    }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+    .section-sub { color: var(--gray); font-size: 1rem; line-height: 1.75; max-width: 540px; }
+    .text-center { text-align: center; }
+    .text-center .section-sub { margin: 0 auto; }
+
+    /* ── WHO IS IT FOR ── */
+    .who-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .who-card {
+      background: var(--light); border-radius: 8px; padding: 2rem 1.5rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .who-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.08); }
+    .who-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .who-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
+    .who-card p { font-size: .85rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── ABOUT ── */
+    .about-wrapper {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .about-image-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+    }
+    .about-image-grid img {
+      width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px;
+    }
+    .about-image-grid img:first-child { grid-column: span 2; aspect-ratio: 16/7; }
+
+    /* ── INCUBATOR ── */
+    .incubator {
+      background: var(--dark); color: var(--white);
+    }
+    .incubator .section-title { color: var(--white); }
+    .incubator .section-sub { color: #aaa; }
+    .incubator-wrapper {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .incubator-perks {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;
+    }
+    .incubator-perk { display: flex; flex-direction: column; gap: .35rem; }
+    .incubator-perk span { font-size: 1.5rem; }
+    .incubator-perk strong { font-size: .9rem; color: var(--white); }
+    .incubator-perk p { font-size: .8rem; color: #888; line-height: 1.5; }
+    .incubator-image {
+      border-radius: 8px; overflow: hidden;
+    }
+    .incubator-image img { width: 100%; display: block; object-fit: cover; }
+
+    /* ── BENEFITS ── */
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem; margin-top: 3rem;
+    }
+    .benefit { display: flex; flex-direction: column; gap: .5rem; }
+    .benefit-icon {
+      width: 48px; height: 48px; background: var(--light); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+    }
+    .benefit h3 { font-size: .9rem; font-weight: 700; }
+    .benefit p { font-size: .82rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── COLLECTIONS ── */
+    .collections-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 2.5rem;
+    }
+    .collection-card { border-radius: 6px; overflow: hidden; position: relative; cursor: pointer; }
+    .collection-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; transition: transform .3s; }
+    .collection-card:hover img { transform: scale(1.04); }
+    .collection-card-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.7));
+      color: var(--white); padding: 1.5rem .75rem .75rem;
+      font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .collections-cta { text-align: center; margin-top: 2rem; }
+
+    /* ── PARTNER ── */
+    .partner-wrapper {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .partner-image img { width: 100%; border-radius: 8px; object-fit: cover; }
+    .partner-perks { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem; }
+    .partner-perk { display: flex; gap: 1rem; align-items: flex-start; }
+    .partner-perk-icon {
+      width: 40px; height: 40px; background: var(--light);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .partner-perk div strong { display: block; font-size: .9rem; margin-bottom: .2rem; }
+    .partner-perk div p { font-size: .82rem; color: var(--gray); line-height: 1.5; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--light); }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: var(--white); border-radius: 8px; padding: 1.75rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    }
+    .stars { color: #F5A623; font-size: 1rem; margin-bottom: 1rem; }
+    .testimonial-card p { font-size: .88rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.25rem; }
+    .testimonial-author { display: flex; align-items: center; gap: .75rem; }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--wine); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .9rem;
+    }
+    .testimonial-author div strong { font-size: .85rem; }
+    .testimonial-author div span { font-size: .78rem; color: var(--gray); }
+
+    /* ── LEAD FORM ── */
+    .lead-form-section {
+      background: var(--wine);
+      color: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .lead-form-section .section-title { color: var(--white); }
+    .lead-form-section .section-sub { color: rgba(255,255,255,.75); }
+    .lead-perks { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: .75rem; }
+    .lead-perks li { display: flex; gap: .75rem; align-items: center; font-size: .9rem; }
+    .lead-perks li::before { content: "✓"; font-weight: 800; font-size: 1rem; color: rgba(255,255,255,.9); }
+
+    .form-card {
+      background: var(--white); border-radius: 12px; padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .form-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--dark); margin-bottom: .4rem; }
+    .form-card p { font-size: .85rem; color: var(--gray); margin-bottom: 1.75rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; font-size: .8rem; font-weight: 600; color: var(--dark); margin-bottom: .4rem; }
+    .form-group input {
+      width: 100%; padding: .8rem 1rem;
+      border: 1.5px solid var(--border); border-radius: 6px;
+      font-size: .9rem; font-family: inherit; color: var(--dark);
+      transition: border-color .2s, box-shadow .2s; outline: none;
+    }
+    .form-group input:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 3px rgba(123,30,30,.12);
+    }
+    .form-group input::placeholder { color: #bbb; }
+    .form-submit {
+      width: 100%; padding: 1rem;
+      background: var(--wine); color: var(--white);
+      border: none; border-radius: 6px;
+      font-size: 1rem; font-weight: 700; font-family: inherit;
+      cursor: pointer; transition: background .2s, transform .15s;
+      margin-top: .5rem;
+    }
+    .form-submit:hover { background: var(--wine-l); transform: translateY(-1px); }
+    .form-note { text-align: center; font-size: .75rem; color: #aaa; margin-top: 1rem; }
+
+    /* success state */
+    .form-success {
+      display: none; text-align: center; padding: 2rem 0;
+    }
+    .form-success .check { font-size: 3rem; margin-bottom: 1rem; }
+    .form-success h4 { font-size: 1.2rem; font-weight: 800; color: var(--wine); margin-bottom: .5rem; }
+    .form-success p { font-size: .9rem; color: var(--gray); }
+
+    /* ── WHATSAPP CONTACTS ── */
+    .retail-section { background: var(--white); }
+    .retail-contacts {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; justify-content: center;
+    }
+    .retail-contact {
+      border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: var(--dark); transition: all .2s;
+      min-width: 220px;
+    }
+    .retail-contact:hover { border-color: var(--wine); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .retail-contact .wa-icon { font-size: 1.75rem; }
+    .retail-contact div strong { display: block; font-size: .9rem; }
+    .retail-contact div span { font-size: .8rem; color: var(--gray); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: var(--white);
+      padding: 3.5rem 5% 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-brand p { font-size: .85rem; color: #888; line-height: 1.7; margin: 1rem 0; max-width: 260px; }
+    .footer-socials { display: flex; gap: .75rem; }
+    .footer-socials a {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,.08); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: .9rem; transition: background .2s;
+    }
+    .footer-socials a:hover { background: var(--wine); }
+    footer h4 { font-size: .85rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    footer ul a { color: #888; font-size: .85rem; text-decoration: none; transition: color .2s; }
+    footer ul a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { font-size: .78rem; color: #555; }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      background: #25D366; color: var(--white);
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.55); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { min-height: 260px; }
+      .about-wrapper, .incubator-wrapper, .partner-wrapper, .lead-form-section { grid-template-columns: 1fr; gap: 2.5rem; }
+      .collections-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 3.5rem 5%; }
+      .collections-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .trust-item { min-width: 50%; }
+      .hero-text { padding: 3rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">BAY</span>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#colecciones">Colecciones</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#incubadora">Incubadora</a></li>
+  </ul>
+  <a href="#registro" class="nav-cta">Quiero ser partner</a>
+  <div class="hamburger" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio" style="padding:0;">
+  <div class="hero-text">
+    <span class="hero-badge">BAY Mayorista</span>
+    <h1>Tu <em>socio estratégico</em> para comprar mejor y hacer crecer tu negocio</h1>
+    <p>En Bay te acompañamos con productos de calidad, acompañamiento constante y todas las herramientas que necesitás para renovar tu local y vender más.</p>
+    <div class="hero-buttons">
+      <a href="#registro" class="btn-primary">Quiero ser partner</a>
+      <a href="#colecciones" class="btn-outline">Catálogo Mayorista</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-overlay"></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <span class="trust-icon">👕</span>
+    <div><strong>Talles reales y calidad premium</strong><p>Indumentaria pensada para vender más</p></div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">💬</span>
+    <div><strong>Atención personalizada por WhatsApp</strong><p>Un asesor dedicado para tu negocio</p></div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">📦</span>
+    <div><strong>Socio, capacidades y variedades</strong><p>Colecciones amplias y renovadas</p></div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">🤝</span>
+    <div><strong>Relación a largo plazo</strong><p>Crecemos juntos, siempre</p></div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-icon">🚚</span>
+    <div><strong>Envíos a todo el país</strong><p>Logística ágil y segura</p></div>
+  </div>
+</div>
+
+<!-- WHO IS IT FOR -->
+<section id="para-quien">
+  <div class="text-center" style="max-width:600px;margin:0 auto 0">
+    <p class="section-label">Bay es para quienes venden indumentaria</p>
+    <h2 class="section-title">¿Tu negocio es de estos?</h2>
+    <p class="section-sub">Trabajamos con locales de indumentaria, showrooms, revendedoras y marcas que quieren crecer.</p>
+  </div>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-card-icon">🏬</div>
+      <h3>Locales de indumentaria</h3>
+      <p>Renovate con prendas de calidad, variedad de categorías y talles pensados para vender.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">✨</div>
+      <h3>Showrooms</h3>
+      <p>Sumá novedades constantes, toda la colección y prendas fáciles de revender en tienda.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">🛍️</div>
+      <h3>Revendedoras y emprendedoras</h3>
+      <p>Tu primera pedido y poder iniciar tu negocio con asesoramiento, novedades y compromiso.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">🏷️</div>
+      <h3>Marcas que quieren producir</h3>
+      <p>Desarrollá tu propia línea de moda con acompañamiento, producción y asesoramiento comercial.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="nosotros" style="background:var(--light);">
+  <div class="about-wrapper">
+    <div class="about-image-grid">
+      <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&q=80" alt="Equipo Bay" />
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80" alt="Ropa Bay" />
+      <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80" alt="Local" />
+    </div>
+    <div>
+      <p class="section-label">Detrás de Bay hay</p>
+      <h2 class="section-title">Un equipo que entiende el negocio mayorista</h2>
+      <p class="section-sub">Acompañamos a locales, showrooms y revendedores con una mirada comercial: no solo vendemos, entendemos qué necesita tu negocio para vender mejor.</p>
+      <a href="#registro" class="btn-primary" style="display:inline-block;margin-top:2rem;">Conocé el equipo</a>
+    </div>
+  </div>
+</section>
+
+<!-- INCUBATOR -->
+<section class="incubator" id="incubadora">
+  <div class="incubator-wrapper">
+    <div>
+      <p class="section-label" style="color:#e88;">Nuestro nuevo modelo de negocios</p>
+      <h2 class="section-title" style="color:#fff;">Incubadora de marcas Bay</h2>
+      <p class="section-sub">Con la incubadora te ayudamos a replicar o crear tu marca, dando acompañamiento personalizado y grandes utilidades con la identidad de tu marca.</p>
+      <div class="incubator-perks">
+        <div class="incubator-perk">
+          <span>👚</span>
+          <strong>Prendas personalizadas</strong>
+          <p>Tu logo, tu marca, tu identidad en cada prenda.</p>
+        </div>
+        <div class="incubator-perk">
+          <span>📦</span>
+          <strong>Maquinaria de apoyo</strong>
+          <p>Producción respaldada con tecnología.</p>
+        </div>
+        <div class="incubator-perk">
+          <span>🚀</span>
+          <strong>Envíos a todo el país</strong>
+          <p>Logística desde el primer pedido.</p>
+        </div>
+        <div class="incubator-perk">
+          <span>💼</span>
+          <strong>Atención personalizada</strong>
+          <p>Un asesor tuyo de principio a fin.</p>
+        </div>
+      </div>
+      <a href="#registro" class="btn-primary" style="display:inline-block;margin-top:2rem;">Más información</a>
+    </div>
+    <div class="incubator-image">
+      <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=700&q=80" alt="Incubadora de marcas" style="border-radius:8px;width:100%;" />
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="ventajas">
+  <div class="text-center">
+    <p class="section-label">Ventajas de comprar en Bay</p>
+    <h2 class="section-title">Más margen. Más confianza. Más ventas.</h2>
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit">
+      <div class="benefit-icon">💰</div>
+      <h3>Más margen</h3>
+      <p>Precios mayoristas que te permiten ganar más en cada venta.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🛡️</div>
+      <h3>Menos riesgo al comprar</h3>
+      <p>Te asesoramos para que comprés solo lo que va a vender.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🎨</div>
+      <h3>Más variedad para ofrecer</h3>
+      <p>Colecciones, talles, 100s de productos con todos los combos.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">⚡</div>
+      <h3>Más agilidad</h3>
+      <p>Pedidos rápidos, confirmados en el día para no perder ventas.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🤲</div>
+      <h3>Más confianza</h3>
+      <p>Acompañamiento real, un asesor siempre disponible para vos.</p>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🌍</div>
+      <h3>Más alcance</h3>
+      <p>Enviamos a todo el país donde quieras que llegue tu pedido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section id="colecciones" style="background:var(--light);">
+  <div class="text-center">
+    <p class="section-label">Colecciones pensadas para renovar tu local</p>
+    <h2 class="section-title">Elegí lo que mejor vende</h2>
+    <p class="section-sub">Explorá nuestras colecciones con productos clásicos, tendencia y variedades para tu negocio.</p>
+  </div>
+  <div class="collections-grid">
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80" alt="Buzos" />
+      <div class="collection-card-label">Buzos</div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1602810316693-3667c854239a?w=400&q=80" alt="Remeras" />
+      <div class="collection-card-label">Remeras</div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=400&q=80" alt="Tejidos" />
+      <div class="collection-card-label">Tejidos</div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80" alt="Jeans" />
+      <div class="collection-card-label">Jeans</div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80" alt="Accesorios" />
+      <div class="collection-card-label">Accesorios</div>
+    </div>
+  </div>
+  <div class="collections-cta">
+    <a href="#registro" class="btn-primary">Explorar catálogo</a>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section>
+  <div class="partner-wrapper">
+    <div class="partner-image">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80" alt="Socios Bay" style="border-radius:8px;" />
+    </div>
+    <div>
+      <p class="section-label">Somos tu socio mayorista</p>
+      <h2 class="section-title">Vemos a nuestros mayoristas como <span style="color:var(--wine)">socios.</span></h2>
+      <p class="section-sub">Te acompañamos en todo tu asesoramiento, te formamos, te brindamos acceso a tendencias y atención medida para que tu negocio crezca.</p>
+      <div class="partner-perks">
+        <div class="partner-perk">
+          <div class="partner-perk-icon">👤</div>
+          <div>
+            <strong>Asesoramiento personalizado</strong>
+            <p>Un asesor dedicado que conoce tu negocio y te acompaña en cada pedido.</p>
+          </div>
+        </div>
+        <div class="partner-perk">
+          <div class="partner-perk-icon">📊</div>
+          <div>
+            <strong>Información de tendencias y novedades</strong>
+            <p>Siempre al día con lo que más vende en cada temporada.</p>
+          </div>
+        </div>
+        <div class="partner-perk">
+          <div class="partner-perk-icon">💬</div>
+          <div>
+            <strong>Soporte y atención siempre disponible</strong>
+            <p>Respondemos por WhatsApp en tiempo real.</p>
+          </div>
+        </div>
+      </div>
+      <a href="#registro" class="btn-primary" style="display:inline-block;margin-top:2rem;">Quiero ser partner</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="text-center">
+    <p class="section-label">Lo que dicen nuestros socios</p>
+    <h2 class="section-title">Más de 500 mayoristas en todo el país confían en Bay</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Soy un nuevo proveedor de confianza, siempre me resuelven para elegir lo que mejor se adapta a mi local. Muy recomendable."</p>
+      <div class="testimonial-author">
+        <div class="avatar">M</div>
+        <div><strong>Marisa, Dueña de local</strong><span>Rosario, Santa Fe</span></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Soy un nuevo proveedor de confianza, siempre me resuelven para elegir lo que mejor se adapta. Es genial tener una tienda que me ayuda así."</p>
+      <div class="testimonial-author">
+        <div class="avatar">M</div>
+        <div><strong>Marisa, Dueña de local</strong><span>Tucumán, capital</span></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Soy un nuevo proveedor de confianza, siempre me resuelven para elegir lo que mejor se adapta. Ayuda a crecer el negocio."</p>
+      <div class="testimonial-author">
+        <div class="avatar">M</div>
+        <div><strong>Marisa, Dueña de local</strong><span>Buenos Aires, CABA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section class="lead-form-section" id="registro">
+  <div>
+    <p class="section-label" style="color:rgba(255,255,255,.7);">¿Listo para crecer?</p>
+    <h2 class="section-title">Registrate y empezá a comprar como mayorista</h2>
+    <p class="section-sub">Completá el formulario y un asesor de Bay se va a contactar con vos para darte toda la información que necesitás.</p>
+    <ul class="lead-perks">
+      <li>Acceso al catálogo completo con precios mayoristas</li>
+      <li>Asesor personal dedicado a tu negocio</li>
+      <li>Novedades y colecciones antes que nadie</li>
+      <li>Envíos a todo el país desde el primer pedido</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="form-card">
+      <h3>Quiero ser partner Bay</h3>
+      <p>Sin compromiso. Un asesor te contacta en menos de 24 hs.</p>
+
+      <form id="leadForm" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej: María González" required />
+        </div>
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp *</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="Ej: +54 9 11 1234-5678" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="Ej: maria@milocal.com" required />
+        </div>
+        <button type="submit" class="form-submit">Quiero ser partner →</button>
+        <p class="form-note">🔒 Tus datos están seguros. No compartimos tu información.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="check">✅</div>
+        <h4>¡Gracias, ya recibimos tu solicitud!</h4>
+        <p>Un asesor de Bay se va a comunicar con vos por WhatsApp en las próximas horas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RETAIL CONTACTS -->
+<section class="retail-section">
+  <div class="text-center">
+    <p class="section-label" style="margin-bottom:.5rem;">¿Sos minorista?</p>
+    <h2 class="section-title">Contactate con nuestros contactos minoristas</h2>
+  </div>
+  <div class="retail-contacts">
+    <a href="https://wa.me/5491100000001" class="retail-contact" target="_blank" rel="noopener">
+      <span class="wa-icon">📱</span>
+      <div><strong>José C. Paz</strong><span>11 2222-3370</span></div>
+      <span style="margin-left:auto;font-size:.9rem;color:var(--wine)">→</span>
+    </a>
+    <a href="https://wa.me/5491100000002" class="retail-contact" target="_blank" rel="noopener">
+      <span class="wa-icon">📱</span>
+      <div><strong>San Miguel</strong><span>11 2222-7512</span></div>
+      <span style="margin-left:auto;font-size:.9rem;color:var(--wine)">→</span>
+    </a>
+    <a href="https://wa.me/5491100000003" class="retail-contact" target="_blank" rel="noopener">
+      <span class="wa-icon">📱</span>
+      <div><strong>Los Polvorines</strong><span>11 2222-9137</span></div>
+      <span style="margin-left:auto;font-size:.9rem;color:var(--wine)">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="font-size:1.6rem;font-weight:900;letter-spacing:3px;">BAY</div>
+      <p>Tu mayorista de prendas premium. Acompañamos a locales, showrooms y revendedores en todo el país para que vendan mejor.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Instagram">ig</a>
+        <a href="#" aria-label="WhatsApp">wa</a>
+        <a href="#" aria-label="TikTok">tk</a>
+      </div>
+    </div>
+    <div>
+      <h4>Navegar</h4>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#colecciones">Colecciones</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#incubadora">Incubadora</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Mayoristas</h4>
+      <ul>
+        <li><a href="#registro">Quiero ser partner</a></li>
+        <li><a href="#para-quien">¿Para quién?</a></li>
+        <li><a href="#ventajas">Ventajas</a></li>
+        <li><a href="#colecciones">Catálogo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>¿Querés ser socio?</h4>
+      <p style="color:#888;font-size:.85rem;line-height:1.7;margin-bottom:1rem;">Completá el formulario o escribinos directo por WhatsApp.</p>
+      <a href="#registro" class="btn-primary" style="font-size:.82rem;padding:.6rem 1.25rem;">Empezá ahora →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Bay Mayorista. Todos los derechos reservados.</p>
+    <p>Diseñado para crecer juntos.</p>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/5491100000000" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  💬
+</a>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('leadForm');
+    const success = document.getElementById('formSuccess');
+    const btn = form.querySelector('.form-submit');
+
+    const data = {
+      nombre:   document.getElementById('nombre').value.trim(),
+      whatsapp: document.getElementById('whatsapp').value.trim(),
+      email:    document.getElementById('email').value.trim(),
+      fecha:    new Date().toISOString()
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    try {
+      const sasToken = 'sp=racw&st=2026-06-03T21:56:00Z&se=2029-06-04T06:11:00Z&sv=2026-02-06&sr=c&sig=oLcAyATIfb3%2FLn4IbDmVXA56G6Am2qdm%2FbtS4nrORHA%3D';
+      const blobName = `${new Date().toISOString().replace(/[:.]/g,'-')}_${Math.random().toString(36).slice(2,8)}.json`;
+      const url = `https://bayleads.blob.core.windows.net/leads/${blobName}?${sasToken}`;
+
+      const res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'x-ms-blob-type': 'BlockBlob',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      form.style.display = 'none';
+      success.style.display = 'block';
+    } catch (err) {
+      console.error('Error al guardar prospecto:', err);
+      btn.disabled = false;
+      btn.textContent = 'Quiero ser partner →';
+      alert('Hubo un error al enviar. Por favor intentá de nuevo.');
+    }
+  }
+
+  function toggleMenu(el) {
+    el.classList.toggle('open');
+    // simple mobile nav toggle — expand as needed
+  }
+</script>
+
+</body>
+</html>
